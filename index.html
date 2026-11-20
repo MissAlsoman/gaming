@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Great Thanksgiving Game Quest!</title>
+<style>
+:root{--ink:#29251f;--cream:#fff8e9;--gold:#e6b85c;--rust:#a84f32;--forest:#334b3d;--muted:#6b6257}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;color:var(--ink);font-family:Georgia,'Times New Roman',serif;background:radial-gradient(ellipse at top,#77523a 0%,#3c332c 55%,#211f1b 100%);padding:28px 16px}
+main{max-width:980px;margin:auto}
+header{text-align:center;color:#fff5df;padding:22px 10px 28px}
+.kicker{letter-spacing:.22em;text-transform:uppercase;font:700 12px Arial,sans-serif;color:#edc879}
+h1{font-size:clamp(2.2rem,6vw,4.2rem);line-height:1.02;margin:12px 0;color:#ffe3a6;text-shadow:0 3px 0 #633b27}
+header p{font:16px/1.5 Arial,sans-serif;color:#f5e6d0;max-width:660px;margin:12px auto 0}
+.panel{background:var(--cream);border:3px solid var(--gold);border-radius:18px;padding:clamp(20px,4vw,38px);box-shadow:0 14px 35px #17120e80}
+.instructions{font:15px/1.5 Arial,sans-serif;color:var(--muted);margin:0 0 22px}
+.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+label{display:block;font:700 14px Arial,sans-serif;color:#4a3d2e}
+label span{display:block;font-weight:400;color:#7b6e5c;margin-top:4px;font-size:12px}
+input{width:100%;margin-top:8px;padding:13px 14px;border:1.5px solid #c8b797;border-radius:9px;background:#fffdf7;font:16px Arial,sans-serif;color:#2c2924}
+input:focus{outline:3px solid #e6b85c80;border-color:#a86b36}
+.actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:24px}
+button{border:0;border-radius:999px;padding:14px 22px;font:700 15px Arial,sans-serif;cursor:pointer}
+.primary{background:var(--forest);color:white}.secondary{background:#ead9b8;color:#453323}
+button:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.story{display:none;margin-top:28px;background:#fffdf6;border:2px dashed #ba8a4c;border-radius:14px;padding:clamp(20px,4vw,34px)}
+.story h2{text-align:center;color:#76452d;font-size:clamp(1.7rem,4vw,2.4rem);margin:0 0 20px}
+.story p{font-size:18px;line-height:1.8;margin:0 0 14px}
+.word{font-weight:bold;color:#954829;text-decoration:underline;text-decoration-color:#ddb45b;text-decoration-thickness:2px}
+.note{text-align:center;font:12px Arial,sans-serif;color:#786d5e;margin:24px 0 0}
+@media(max-width:620px){.fields{grid-template-columns:1fr}body{padding:16px 10px}}
+@media print{body{background:white;padding:0}.panel{box-shadow:none}.fields,.instructions,.actions,header{display:none!important}.story{display:block!important;border:0}}
+</style>
+</head>
+<body>
+<main>
+<header>
+<div class="kicker">A Thanksgiving Gaming Adventure</div>
+<h1>🦃 The Great Thanksgiving<br>Game Quest! 🎮</h1>
+<p>Every great game needs a hero, a challenge, and a little unexpected fun. Fill in the blanks below and generate your very own Thanksgiving adventure!</p>
+</header>
+<section class="panel" aria-labelledby="formTitle">
+<h2 id="formTitle">Build Your Story</h2>
+<p class="instructions">Don't overthink it! Type one word or a short phrase for each prompt. The sillier your answers, the more entertaining your story may be.</p>
+<form id="madlibForm">
+<div class="fields">
+<label>1. Character name<span>A name for your hero</span><input name="hero" placeholder="Example: Captain Pickles" required></label>
+<label>2. Adjective<span>Describe your hero</span><input name="adjective" placeholder="Example: legendary" required></label>
+<label>3. Video game genre<span>What kind of game is it?</span><input name="genre" placeholder="Example: adventure" required></label>
+<label>4. In-game item<span>A useful or unusual object</span><input name="item" placeholder="Example: golden controller" required></label>
+<label>5. Place<span>Where does the quest happen?</span><input name="place" placeholder="Example: Pumpkin Valley" required></label>
+<label>6. Enemy or challenge<span>What stands in the hero's way?</span><input name="enemy" placeholder="Example: the Gravy Goblin" required></label>
+<label>7. Action verb<span>Something your hero does</span><input name="verb" placeholder="Example: dodge" required></label>
+<label>8. Thanksgiving food<span>Choose a favorite food</span><input name="food" placeholder="Example: mashed potatoes" required></label>
+<label>9. Number<span>Any number</span><input name="number" type="number" placeholder="Example: 12" required></label>
+<label>10. Emotion<span>How does your hero feel?</span><input name="emotion" placeholder="Example: suspicious" required></label>
+</div>
+<div class="actions"><button class="primary" type="submit">✨ Generate My Story</button><button class="secondary" type="reset">Start Over</button></div>
+</form>
+<div class="story" id="story" aria-live="polite">
+<h2>🏆 The Quest for the Missing Feast 🏆</h2>
+<div id="storyText"></div>
+<div class="actions"><button class="primary" id="copyBtn" type="button">Copy My Story</button><button class="secondary" id="printBtn" type="button">Print Story</button></div>
+</div>
+<p class="note">Made for Gaming Concepts • Be creative, have fun, and enjoy the quest!</p>
+</section>
+</main>
+<script>
+const form=document.getElementById('madlibForm');
+const story=document.getElementById('story');
+const storyText=document.getElementById('storyText');
+let finishedStory='';
+const clean=v=>v.trim();
+form.addEventListener('submit',e=>{
+ e.preventDefault();
+ const d=Object.fromEntries(new FormData(form).entries());
+ for(const k in d)d[k]=clean(d[k]);
+ if(Object.values(d).some(v=>!v))return;
+ const paragraphs=[
+ 'It was Thanksgiving morning in <b>'+escapeHTML(d.place)+'</b>, and the annual Feast Festival was about to begin. Suddenly, the legendary game world sent out an emergency alert: the entire Thanksgiving feast had disappeared!',
+ 'Only one hero could save the day: <b>'+escapeHTML(d.adjective)+' '+escapeHTML(d.hero)+'</b>, the star of a brand-new <b>'+escapeHTML(d.genre)+'</b> game. Armed with a mysterious <b>'+escapeHTML(d.item)+'</b>, the hero set off to find the missing food.',
+ 'But danger was waiting! The mighty <b>'+escapeHTML(d.enemy)+'</b> guarded the path to the feast. “You shall never pass!” it shouted. Our hero decided to <b>'+escapeHTML(d.verb)+'</b> past the obstacle, using quick thinking and excellent gaming skills.',
+ 'After traveling through the level for <b>'+escapeHTML(d.number)+'</b> turns, the hero discovered the secret hiding place: a giant treasure chest filled with <b>'+escapeHTML(d.food)+'</b>! The hero felt <b>'+escapeHTML(d.emotion)+'</b> but knew exactly what to do next.',
+ 'With one final move, the hero rescued the feast and returned it to the festival. The crowd cheered, the final level was complete, and everyone celebrated with a huge Thanksgiving meal.',
+ 'The hero had learned an important lesson: every great game needs a challenge, a creative player, and a story worth remembering. GAME OVER… or maybe just the beginning of the next quest!'
+ ];
+ finishedStory='THE QUEST FOR THE MISSING FEAST\n\n'+paragraphs.map(p=>p.replace(/<[^>]*>/g,'')).join('\n\n');
+ storyText.innerHTML=paragraphs.map(p=>'<p>'+p+'</p>').join('');
+ story.style.display='block';
+ story.scrollIntoView({behavior:'smooth',block:'start'});
+});
+function escapeHTML(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+document.getElementById('copyBtn').addEventListener('click',async()=>{
+ try{await navigator.clipboard.writeText(finishedStory);document.getElementById('copyBtn').textContent='Copied! ✓';}
+ catch{const area=document.createElement('textarea');area.value=finishedStory;document.body.appendChild(area);area.select();document.execCommand('copy');area.remove();document.getElementById('copyBtn').textContent='Copied! ✓';}
+});
+document.getElementById('printBtn').addEventListener('click',()=>window.print());
+form.addEventListener('reset',()=>{story.style.display='none';finishedStory='';document.getElementById('copyBtn').textContent='Copy My Story';});
+</script>
+</body>
+</html>
