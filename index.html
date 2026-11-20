@@ -7,30 +7,42 @@
 <style>
 :root{--ink:#29251f;--cream:#fff8e9;--gold:#e6b85c;--rust:#a84f32;--forest:#334b3d;--muted:#6b6257}
 *{box-sizing:border-box}
-body{margin:0;min-height:100vh;color:var(--ink);font-family:Georgia,'Times New Roman',serif;background:radial-gradient(ellipse at top,#77523a 0%,#3c332c 55%,#211f1b 100%);padding:28px 16px}
-main{max-width:980px;margin:auto}
-header{text-align:center;color:#fff5df;padding:22px 10px 28px}
+body{margin:0;min-height:100vh;color:var(--ink);font-family:Georgia,'Times New Roman',serif;background:radial-gradient(ellipse at top,#77523a 0%,#3c332c 55%,#211f1b 100%);padding:24px 14px}
+main{max-width:1020px;margin:auto}
+header{text-align:center;color:#fff5df;padding:20px 10px 25px}
 .kicker{letter-spacing:.22em;text-transform:uppercase;font:700 12px Arial,sans-serif;color:#edc879}
-h1{font-size:clamp(2.2rem,6vw,4.2rem);line-height:1.02;margin:12px 0;color:#ffe3a6;text-shadow:0 3px 0 #633b27}
-header p{font:16px/1.5 Arial,sans-serif;color:#f5e6d0;max-width:660px;margin:12px auto 0}
-.panel{background:var(--cream);border:3px solid var(--gold);border-radius:18px;padding:clamp(20px,4vw,38px);box-shadow:0 14px 35px #17120e80}
-.instructions{font:15px/1.5 Arial,sans-serif;color:var(--muted);margin:0 0 22px}
-.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+h1{font-size:clamp(2.2rem,6vw,4.1rem);line-height:1.02;margin:12px 0;color:#ffe3a6;text-shadow:0 3px 0 #633b27}
+header p{font:16px/1.5 Arial,sans-serif;color:#f5e6d0;max-width:700px;margin:12px auto 0}
+.panel{background:var(--cream);border:3px solid var(--gold);border-radius:18px;padding:clamp(18px,4vw,36px);box-shadow:0 14px 35px #17120e80}
+.tabs{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:0 0 24px}
+.tab{background:#ead9b8;color:#453323}.tab.active{background:var(--forest);color:white}
+h2{color:#68442d;margin:0 0 12px}
+.instructions{font:15px/1.55 Arial,sans-serif;color:var(--muted);margin:0 0 20px}
+.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
 label{display:block;font:700 14px Arial,sans-serif;color:#4a3d2e}
 label span{display:block;font-weight:400;color:#7b6e5c;margin-top:4px;font-size:12px}
-input{width:100%;margin-top:8px;padding:13px 14px;border:1.5px solid #c8b797;border-radius:9px;background:#fffdf7;font:16px Arial,sans-serif;color:#2c2924}
-input:focus{outline:3px solid #e6b85c80;border-color:#a86b36}
-.actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:24px}
-button{border:0;border-radius:999px;padding:14px 22px;font:700 15px Arial,sans-serif;cursor:pointer}
-.primary{background:var(--forest);color:white}.secondary{background:#ead9b8;color:#453323}
+input,select,textarea{width:100%;margin-top:8px;padding:12px 13px;border:1.5px solid #c8b797;border-radius:9px;background:#fffdf7;font:16px Arial,sans-serif;color:#2c2924}
+textarea{min-height:78px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:3px solid #e6b85c80;border-color:#a86b36}
+.actions{display:flex;flex-wrap:wrap;gap:11px;justify-content:center;margin-top:22px}
+button{border:0;border-radius:999px;padding:13px 20px;font:700 14px Arial,sans-serif;cursor:pointer;transition:.15s}
 button:hover{filter:brightness(1.08);transform:translateY(-1px)}
-.story{display:none;margin-top:28px;background:#fffdf6;border:2px dashed #ba8a4c;border-radius:14px;padding:clamp(20px,4vw,34px)}
-.story h2{text-align:center;color:#76452d;font-size:clamp(1.7rem,4vw,2.4rem);margin:0 0 20px}
-.story p{font-size:18px;line-height:1.8;margin:0 0 14px}
-.word{font-weight:bold;color:#954829;text-decoration:underline;text-decoration-color:#ddb45b;text-decoration-thickness:2px}
-.note{text-align:center;font:12px Arial,sans-serif;color:#786d5e;margin:24px 0 0}
-@media(max-width:620px){.fields{grid-template-columns:1fr}body{padding:16px 10px}}
-@media print{body{background:white;padding:0}.panel{box-shadow:none}.fields,.instructions,.actions,header{display:none!important}.story{display:block!important;border:0}}
+.primary{background:var(--forest);color:white}.secondary{background:#ead9b8;color:#453323}.choice{background:#fffdf6;border:2px solid #c6a16a;color:#443323;border-radius:12px;text-align:left;padding:16px;line-height:1.4;flex:1 1 220px}
+.choice:hover{background:#f6e8cc}
+.hidden{display:none!important}
+.story{margin-top:24px;background:#fffdf6;border:2px dashed #ba8a4c;border-radius:14px;padding:clamp(18px,4vw,30px)}
+.story h2{text-align:center;color:#76452d;font-size:clamp(1.6rem,4vw,2.25rem);margin:0 0 18px}
+.story p{font-size:17px;line-height:1.75;margin:0 0 13px}
+.status{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:12px 0 20px}
+.stat{background:#efe1c7;border-radius:999px;padding:8px 13px;font:700 13px Arial,sans-serif;color:#55412d}
+.scene{background:#f4ead7;border-left:5px solid #a66a37;border-radius:8px;padding:18px;margin:18px 0}
+.scene p{margin:0;font-size:18px}
+.choices{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+.ending{text-align:center;padding:20px;border:2px solid var(--gold);border-radius:12px;background:#fff7e7}
+.note{text-align:center;font:12px Arial,sans-serif;color:#786d5e;margin:22px 0 0}
+.sectionTitle{margin:25px 0 12px;padding-bottom:7px;border-bottom:1px solid #d9c6a4;color:#805033}
+@media(max-width:620px){.fields{grid-template-columns:1fr}body{padding:14px 9px}.tab{flex:1}}
+@media print{body{background:white;padding:0}.panel{box-shadow:none}.tabs,.fields,.instructions,.actions,header{display:none!important}.story{display:block!important;border:0}}
 </style>
 </head>
 <body>
@@ -38,65 +50,116 @@ button:hover{filter:brightness(1.08);transform:translateY(-1px)}
 <header>
 <div class="kicker">A Thanksgiving Gaming Adventure</div>
 <h1>🦃 The Great Thanksgiving<br>Game Quest! 🎮</h1>
-<p>Every great game needs a hero, a challenge, and a little unexpected fun. Fill in the blanks below and generate your very own Thanksgiving adventure!</p>
+<p>Create a character, choose your game mechanics, make decisions, collect items, and see how your Thanksgiving adventure ends!</p>
 </header>
-<section class="panel" aria-labelledby="formTitle">
-<h2 id="formTitle">Build Your Story</h2>
-<p class="instructions">Don't overthink it! Type one word or a short phrase for each prompt. The sillier your answers, the more entertaining your story may be.</p>
+<section class="panel">
+<div class="tabs">
+<button class="tab active" id="madlibTab" type="button">Quick Mad Lib</button>
+<button class="tab" id="builderTab" type="button">Build Your Own Adventure</button>
+</div>
+<section id="madlibMode">
+<h2>✨ Quick Mad Lib</h2>
+<p class="instructions">Fill in the prompts. The sillier your answers, the more surprising your story will be!</p>
 <form id="madlibForm">
 <div class="fields">
-<label>1. Character name<span>A name for your hero</span><input name="hero" placeholder="Example: Captain Pickles" required></label>
-<label>2. Adjective<span>Describe your hero</span><input name="adjective" placeholder="Example: legendary" required></label>
-<label>3. Video game genre<span>What kind of game is it?</span><input name="genre" placeholder="Example: adventure" required></label>
-<label>4. In-game item<span>A useful or unusual object</span><input name="item" placeholder="Example: golden controller" required></label>
-<label>5. Place<span>Where does the quest happen?</span><input name="place" placeholder="Example: Pumpkin Valley" required></label>
-<label>6. Enemy or challenge<span>What stands in the hero's way?</span><input name="enemy" placeholder="Example: the Gravy Goblin" required></label>
-<label>7. Action verb<span>Something your hero does</span><input name="verb" placeholder="Example: dodge" required></label>
-<label>8. Thanksgiving food<span>Choose a favorite food</span><input name="food" placeholder="Example: mashed potatoes" required></label>
-<label>9. Number<span>Any number</span><input name="number" type="number" placeholder="Example: 12" required></label>
-<label>10. Emotion<span>How does your hero feel?</span><input name="emotion" placeholder="Example: suspicious" required></label>
+<label>Character name<input name="hero" placeholder="Captain Pickles" required></label>
+<label>Adjective to describe your hero<input name="adjective" placeholder="legendary" required></label>
+<label>Video game genre<input name="genre" placeholder="adventure" required></label>
+<label>In-game item<input name="item" placeholder="golden controller" required></label>
+<label>Place<input name="place" placeholder="Pumpkin Valley" required></label>
+<label>Enemy or challenge<input name="enemy" placeholder="the Gravy Goblin" required></label>
+<label>Action verb<input name="verb" placeholder="dodge" required></label>
+<label>Thanksgiving food<input name="food" placeholder="mashed potatoes" required></label>
+<label>Number<input name="number" type="number" placeholder="12" required></label>
+<label>Emotion<input name="emotion" placeholder="suspicious" required></label>
 </div>
-<div class="actions"><button class="primary" type="submit">✨ Generate My Story</button><button class="secondary" type="reset">Start Over</button></div>
+<div class="actions"><button class="primary" type="submit">Generate My Story</button><button class="secondary" type="reset">Start Over</button></div>
 </form>
-<div class="story" id="story" aria-live="polite">
-<h2>🏆 The Quest for the Missing Feast 🏆</h2>
-<div id="storyText"></div>
-<div class="actions"><button class="primary" id="copyBtn" type="button">Copy My Story</button><button class="secondary" id="printBtn" type="button">Print Story</button></div>
+<div class="story hidden" id="madlibStory" aria-live="polite"><h2>🏆 The Quest for the Missing Feast</h2><div id="madlibText"></div><div class="actions"><button class="primary" id="copyMadlib" type="button">Copy My Story</button></div></div>
+</section>
+<section id="builderMode" class="hidden">
+<h2>🗺️ Build Your Own Adventure</h2>
+<p class="instructions">You are the game designer! Create the world, character, mission, and mechanics. Then play through your own story by making choices that change what happens.</p>
+<form id="builderForm">
+<h3 class="sectionTitle">1. Design Your Game</h3>
+<div class="fields">
+<label>Game title<input name="title" placeholder="The Great Gobble Quest" required></label>
+<label>Main character<input name="hero" placeholder="Riley the Brave" required></label>
+<label>Game genre<select name="genre"><option>Adventure</option><option>Fantasy RPG</option><option>Platformer</option><option>Mystery</option><option>Strategy</option><option>Survival</option></select></label>
+<label>Game setting<input name="setting" placeholder="A haunted pumpkin patch" required></label>
+<label>Main goal<input name="goal" placeholder="Find the missing golden recipe" required></label>
+<label>Main enemy or obstacle<input name="enemy" placeholder="The Turkey Titan" required></label>
+<label>Special item or power<input name="item" placeholder="A magic pie shield" required></label>
+<label>Sidekick or helper<input name="ally" placeholder="A talking squirrel" required></label>
 </div>
-<p class="note">Made for Gaming Concepts • Be creative, have fun, and enjoy the quest!</p>
+<h3 class="sectionTitle">2. Choose Your Game Mechanics</h3>
+<p class="instructions">Mechanics are the actions, rules, and systems players use to interact with a game. Choose at least one way players will play.</p>
+<div class="fields">
+<label>Primary mechanic<select name="mechanic"><option value="Puzzle solving">Puzzle solving</option><option value="Combat">Combat</option><option value="Exploration">Exploration</option><option value="Stealth">Stealth</option><option value="Platforming">Platforming</option><option value="Resource collection">Resource collection</option><option value="Dialogue and choices">Dialogue and choices</option><option value="Strategy">Strategy</option></select></label>
+<label>Challenge style<select name="challenge"><option>Timed challenge</option><option>Logic puzzle</option><option>Boss battle</option><option>Hidden-object hunt</option><option>Survival challenge</option><option>Choose-your-path story</option></select></label>
+<label>Reward for success<input name="reward" placeholder="A legendary golden turkey trophy" required></label>
+<label>Starting lives<select name="lives"><option>3</option><option>2</option><option>4</option><option>5</option></select></label>
+</div>
+<div class="actions"><button class="primary" type="submit">🚀 Create & Play My Adventure</button><button class="secondary" type="reset">Start a New Design</button></div>
+</form>
+<div class="story hidden" id="gameStory" aria-live="polite">
+<h2 id="gameTitle"></h2>
+<div class="status"><span class="stat" id="lifeStat">❤️ Lives: 3</span><span class="stat" id="itemStat">🎒 Inventory: Empty</span><span class="stat" id="scoreStat">⭐ Quest points: 0</span></div>
+<div id="gameScene"></div>
+<div class="actions"><button class="secondary" id="restartGame" type="button">Restart Adventure</button><button class="secondary" id="copyAdventure" type="button">Copy Adventure Summary</button></div>
+</div>
+</section>
+<p class="note">Gaming Concepts • Storytelling • Player Choice • Game Mechanics • Have fun creating!</p>
 </section>
 </main>
 <script>
-const form=document.getElementById('madlibForm');
-const story=document.getElementById('story');
-const storyText=document.getElementById('storyText');
-let finishedStory='';
-const clean=v=>v.trim();
-form.addEventListener('submit',e=>{
- e.preventDefault();
- const d=Object.fromEntries(new FormData(form).entries());
- for(const k in d)d[k]=clean(d[k]);
- if(Object.values(d).some(v=>!v))return;
- const paragraphs=[
- 'It was Thanksgiving morning in <b>'+escapeHTML(d.place)+'</b>, and the annual Feast Festival was about to begin. Suddenly, the legendary game world sent out an emergency alert: the entire Thanksgiving feast had disappeared!',
- 'Only one hero could save the day: <b>'+escapeHTML(d.adjective)+' '+escapeHTML(d.hero)+'</b>, the star of a brand-new <b>'+escapeHTML(d.genre)+'</b> game. Armed with a mysterious <b>'+escapeHTML(d.item)+'</b>, the hero set off to find the missing food.',
- 'But danger was waiting! The mighty <b>'+escapeHTML(d.enemy)+'</b> guarded the path to the feast. “You shall never pass!” it shouted. Our hero decided to <b>'+escapeHTML(d.verb)+'</b> past the obstacle, using quick thinking and excellent gaming skills.',
- 'After traveling through the level for <b>'+escapeHTML(d.number)+'</b> turns, the hero discovered the secret hiding place: a giant treasure chest filled with <b>'+escapeHTML(d.food)+'</b>! The hero felt <b>'+escapeHTML(d.emotion)+'</b> but knew exactly what to do next.',
- 'With one final move, the hero rescued the feast and returned it to the festival. The crowd cheered, the final level was complete, and everyone celebrated with a huge Thanksgiving meal.',
- 'The hero had learned an important lesson: every great game needs a challenge, a creative player, and a story worth remembering. GAME OVER… or maybe just the beginning of the next quest!'
- ];
- finishedStory='THE QUEST FOR THE MISSING FEAST\n\n'+paragraphs.map(p=>p.replace(/<[^>]*>/g,'')).join('\n\n');
- storyText.innerHTML=paragraphs.map(p=>'<p>'+p+'</p>').join('');
- story.style.display='block';
- story.scrollIntoView({behavior:'smooth',block:'start'});
-});
-function escapeHTML(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-document.getElementById('copyBtn').addEventListener('click',async()=>{
- try{await navigator.clipboard.writeText(finishedStory);document.getElementById('copyBtn').textContent='Copied! ✓';}
- catch{const area=document.createElement('textarea');area.value=finishedStory;document.body.appendChild(area);area.select();document.execCommand('copy');area.remove();document.getElementById('copyBtn').textContent='Copied! ✓';}
-});
-document.getElementById('printBtn').addEventListener('click',()=>window.print());
-form.addEventListener('reset',()=>{story.style.display='none';finishedStory='';document.getElementById('copyBtn').textContent='Copy My Story';});
+const $=id=>document.getElementById(id);
+let adventure=null,step=0,lives=3,points=0,inventory=[];
+function escapeHTML(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function setMode(mode){const isBuilder=mode==='builder';$('madlibMode').classList.toggle('hidden',isBuilder);$('builderMode').classList.toggle('hidden',!isBuilder);$('madlibTab').classList.toggle('active',!isBuilder);$('builderTab').classList.toggle('active',isBuilder);}
+$('madlibTab').onclick=()=>setMode('madlib');$('builderTab').onclick=()=>setMode('builder');
+$('madlibForm').addEventListener('submit',e=>{e.preventDefault();const d=Object.fromEntries(new FormData(e.currentTarget));for(const k in d)d[k]=d[k].trim();const p=[
+'It was Thanksgiving morning in <b>'+escapeHTML(d.place)+'</b>, and the annual Feast Festival was about to begin. Suddenly, the entire feast disappeared!',
+'Only one hero could save the day: <b>'+escapeHTML(d.adjective)+' '+escapeHTML(d.hero)+'</b>, star of a brand-new <b>'+escapeHTML(d.genre)+'</b> game. Armed with a mysterious <b>'+escapeHTML(d.item)+'</b>, the hero set off.',
+'The mighty <b>'+escapeHTML(d.enemy)+'</b> guarded the path. Our hero decided to <b>'+escapeHTML(d.verb)+'</b> past the obstacle using quick thinking and excellent gaming skills.',
+'After '+escapeHTML(d.number)+' turns, the hero found a treasure chest filled with <b>'+escapeHTML(d.food)+'</b>! The hero felt <b>'+escapeHTML(d.emotion)+'</b>, but rescued the feast just in time.',
+'The crowd cheered. The level was complete, and everyone celebrated. GAME OVER… or maybe just the beginning of the next quest!'
+];$('madlibText').innerHTML=p.map(x=>'<p>'+x+'</p>').join('');$('madlibStory').classList.remove('hidden');$('madlibStory').scrollIntoView({behavior:'smooth'});});
+$('madlibForm').addEventListener('reset',()=>$('madlibStory').classList.add('hidden'));
+$('copyMadlib').onclick=()=>copyText($('madlibText').innerText,'copyMadlib');
+function copyText(text,id){const b=$(id);const done=()=>{b.textContent='Copied! ✓';};if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(done).catch(()=>fallbackCopy(text,done));}else fallbackCopy(text,done);}
+function fallbackCopy(text,done){const a=document.createElement('textarea');a.value=text;document.body.appendChild(a);a.select();document.execCommand('copy');a.remove();done();}
+$('builderForm').addEventListener('submit',e=>{e.preventDefault();const d=Object.fromEntries(new FormData(e.currentTarget));for(const k in d)d[k]=d[k].trim();adventure=d;step=0;lives=Number(d.lives);points=0;inventory=[];$('gameTitle').textContent='🎮 '+d.title;renderScene();$('gameStory').classList.remove('hidden');$('gameStory').scrollIntoView({behavior:'smooth'});});
+function updateStats(){$('lifeStat').textContent='❤️ Lives: '+lives;$('itemStat').textContent='🎒 Inventory: '+(inventory.length?inventory.join(', '):'Empty');$('scoreStat').textContent='⭐ Quest points: '+points;}
+function showScene(title,description,options){$('gameScene').innerHTML='<div class="scene"><h3>'+title+'</h3><p>'+description+'</p><div class="choices">'+options.map((o,i)=>'<button class="choice" data-choice="'+i+'">'+o.label+'<br><small>'+o.detail+'</small></button>').join('')+'</div></div>';document.querySelectorAll('[data-choice]').forEach(btn=>btn.addEventListener('click',()=>options[Number(btn.dataset.choice)].action()));updateStats();}
+function renderScene(){
+ const d=adventure;
+ if(lives<=0){finish('💤 GAME OVER','Your hero ran out of lives before completing the quest. Every game designer learns from playtesting! Try a different strategy and play again.');return;}
+ if(step===0){showScene('Level 1: The Mission', 'Thanksgiving is in danger! '+escapeHTML(d.hero)+' must '+escapeHTML(d.goal)+'. Your helper, '+escapeHTML(d.ally)+', has joined the quest. Your main mechanic is <b>'+escapeHTML(d.mechanic)+'</b>, and the first challenge is a <b>'+escapeHTML(d.challenge)+'</b>. What will you do?',[
+ {label:'Explore the area',detail:'Look for clues and useful items. (+1 point)',action:()=>{points++;inventory.push(d.item);step=1;renderScene();}},
+ {label:'Ask your helper for advice',detail:'Work as a team. (+1 point)',action:()=>{points++;step=2;renderScene();}},
+ {label:'Rush toward the obstacle',detail:'Take a risk! (-1 life)',action:()=>{lives--;step=1;renderScene();}}
+ ]);}
+ else if(step===1){showScene('Level 2: The Hidden Trail','You discover a tricky path guarded by '+escapeHTML(d.enemy)+'. Your '+escapeHTML(d.item)+' might help. How will you approach the challenge?',[
+ {label:'Use your special item',detail:'Spend your item to overcome the obstacle. (+2 points)',action:()=>{if(!inventory.includes(d.item))inventory.push(d.item);inventory=inventory.filter(x=>x!==d.item);points+=2;step=3;renderScene();}},
+ {label:'Solve the challenge carefully',detail:'Use the selected mechanic: '+escapeHTML(d.mechanic)+'. (+1 point)',action:()=>{points++;step=3;renderScene();}},
+ {label:'Try to sneak past',detail:'A risky shortcut. (-1 life)',action:()=>{lives--;step=3;renderScene();}}
+ ]);}
+ else if(step===2){showScene('Level 2: A Helpful Hint',escapeHTML(d.ally)+' spots a clue that reveals a safer route. You can prepare before facing '+escapeHTML(d.enemy)+'. What is your next move?',[
+ {label:'Follow the clue',detail:'Gain a bonus and keep your lives. (+2 points)',action:()=>{points+=2;inventory.push('Secret map');step=3;renderScene();}},
+ {label:'Ignore the clue and charge ahead',detail:'Brave, but dangerous. (-1 life)',action:()=>{lives--;step=3;renderScene();}}
+ ]);}
+ else if(step===3){showScene('Final Level: The Big Showdown','At last, '+escapeHTML(d.hero)+' faces '+escapeHTML(d.enemy)+'. The fate of Thanksgiving—and the goal to '+escapeHTML(d.goal)+'—depends on your final decision!',[
+ {label:'Use strategy and teamwork',detail:'Combine your mechanic and helper. (+3 points)',action:()=>{points+=3;finish('🏆 FEAST SAVED!','You used teamwork, smart choices, and '+escapeHTML(d.mechanic).toLowerCase()+' to defeat the challenge. Your reward: '+escapeHTML(d.reward)+'.');}},
+ {label:'Go all in with your special power',detail:'A bold final move. (+2 points, may cost a life)',action:()=>{points+=2;if(lives>1)lives--;updateStats();finish('⚔️ VICTORY WITH A TWIST','Your bold move worked! You completed the quest and earned '+escapeHTML(d.reward)+'. You made it, but it was close!');}},
+ {label:'Find another way around',detail:'Choose a creative solution. (+2 points)',action:()=>{points+=2;finish('🌟 SECRET ENDING UNLOCKED','You found a clever alternative and saved the day without a direct showdown. Your reward: '+escapeHTML(d.reward)+'.');}}
+ ]);}
+ updateStats();
+}
+function finish(title,message){$('gameScene').innerHTML='<div class="ending"><h2>'+title+'</h2><p>'+message+'</p><p><b>Final quest points: '+points+'</b></p><p>Think like a game designer: Which choice changed your adventure the most? Which mechanic made the game fun?</p><div class="actions"><button class="primary" id="playAgain" type="button">Play Again</button></div></div>';updateStats();$('playAgain').onclick=()=>{step=0;lives=Number(adventure.lives);points=0;inventory=[];renderScene();};}
+$('restartGame').onclick=()=>{if(!adventure)return;step=0;lives=Number(adventure.lives);points=0;inventory=[];renderScene();};
+$('copyAdventure').onclick=()=>{if(!adventure)return;copyText('Game: '+adventure.title+'\nHero: '+adventure.hero+'\nGenre: '+adventure.genre+'\nSetting: '+adventure.setting+'\nGoal: '+adventure.goal+'\nMechanic: '+adventure.mechanic+'\nChallenge: '+adventure.challenge+'\nReward: '+adventure.reward+'\nQuest points: '+points+'\nInventory: '+inventory.join(', '),'copyAdventure');};
+$('builderForm').addEventListener('reset',()=>{$('gameStory').classList.add('hidden');adventure=null;});
 </script>
 </body>
 </html>
